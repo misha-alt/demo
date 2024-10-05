@@ -36,5 +36,12 @@ VALUES(1, 'Stone', 'Simple Stone', 10, 'Mogilev');
 INSERT INTO USER(id, login, password)
 VALUES(1, 'Jim', 'fff');
 
+
+INSERT INTO USER_ROLES(user_id, userrole_id)
+VALUES(1, 1);
+
+INSERT INTO ROLESOFUSERS(id, role_name)
+VALUES(1, 'ROLE_EMPLOEE');
+
 alter table USER_ROLES add constraint f123UC foreign key (user_id ) references USER;
 alter table USER_ROLES add constraint fo567C foreign key (userrole_id ) references ROLESOFUSERS;

@@ -30,4 +30,9 @@ public class UserServiceImpl implements UserService {
             throw new UserNotFoundException("User not found with id: " + id);
         }
     }
+    @Override
+    public UserDto getUserByLogin(String login) {
+        User user = userRepo.findUserByLogin(login);
+        return UserMapper.mapToUserDto(user);
+    }
 }

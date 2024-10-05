@@ -7,4 +7,6 @@ import com.example.demo.productDTO.UserDto;
 public interface UserService {
 
     UserDto getUserById(Long id);
+
+    UserDto getUserByLogin(String login);
 }

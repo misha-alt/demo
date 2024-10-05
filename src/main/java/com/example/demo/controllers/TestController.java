@@ -2,6 +2,7 @@ package com.example.demo.controllers;
 
 import com.example.demo.mapper.ProductMapper;
 import com.example.demo.model.Product;
+import com.example.demo.model.RolesOfUsers;
 import com.example.demo.model.User;
 import com.example.demo.productDTO.ProductDto;
 import com.example.demo.productDTO.UserDto;
@@ -53,7 +54,15 @@ public String testreq(){
     }*/
     UserDto userDto = userService.getUserById(1L);
 
-    return userDto.getLogin();
+    StringBuilder result = new StringBuilder(userDto.getLogin()+", ");
+
+
+for (RolesOfUsers roles:userDto.getAuthority()){
+
+    result.append(roles.getRole_name()).append(",");
+}
+
+return  result.toString();
 }
 
 @PutMapping("{id}")

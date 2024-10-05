@@ -6,10 +6,28 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;*/
 
-/*@Service
-@EnableWebSecurity*/
-public class UserDetailsService /*implements org.springframework.security.core.userdetails.UserDetailsService*/ {
-  /*  @Autowired
+import com.example.demo.mapper.UserMapper;
+import com.example.demo.model.RolesOfUsers;
+import com.example.demo.model.User;
+import com.example.demo.productDTO.UserDto;
+import com.example.demo.services.UserService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.stereotype.Service;
+
+import java.util.*;
+import java.util.stream.Collectors;
+
+//@Service
+//@EnableWebSecurity
+@Configuration
+public class UserDetailsService implements org.springframework.security.core.userdetails.UserDetailsService {
+    @Autowired
     private UserService userService;
 
     public UserDetailsService(UserService userService) {
@@ -17,15 +35,19 @@ public class UserDetailsService /*implements org.springframework.security.core.u
     }
     @Override
     public UserDetails loadUserByUsername(String login) throws UsernameNotFoundException {
-        User user  = userService.getUserByLogin(login);
+       UserDto userDto = userService.getUserByLogin(login);
 
-        if (user == null) {
+        if (userDto == null) {
             throw new UsernameNotFoundException("User not found");
         }
+
+
+
+
         return new org.springframework.security.core.userdetails.User(
-                user.getLogin(),
-                user.getPassword(),
-                getAuthorities(user)
+                userDto.getLogin(),
+                userDto.getPassword(),
+                getAuthorities(UserMapper.mapToUser(userDto))
         );
     }
 
@@ -35,5 +57,5 @@ public class UserDetailsService /*implements org.springframework.security.core.u
             authorities.add(new SimpleGrantedAuthority(roleOfPerson.getRole_name()));
         }
         return authorities;
-    }*/
+    }
 }
