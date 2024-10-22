@@ -18,7 +18,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-@CrossOrigin("*")
+//@CrossOrigin("*")
 @AllArgsConstructor
 @RestController
 @RequestMapping("/test")
@@ -39,31 +39,40 @@ public ResponseEntity<ProductDto> getProductById(@PathVariable("id") Long id){
     ProductDto getProd = productService.getProductById(id);
     return  ResponseEntity.ok(getProd);
 }
-//@GetMapping()
-//public ResponseEntity<List<ProductDto>> getAllProd(){
-//List<ProductDto> listProd = productService.getAllProduct();
-//    return ResponseEntity.ok(listProd);
-//}
 @GetMapping()
-public String testreq(){
+public ResponseEntity<List<ProductDto>> getAllProd(){
+List<ProductDto> listProd = productService.getAllProduct();
+    return ResponseEntity.ok(listProd);
+}
+
+
+//@GetMapping()
+//public List<ProductDto>  tests(){
 //    List<ProductDto> listProd = productService.getAllProduct();
-    //Product product  = new Product(1L,"Titile", "Description",12, "City");
-
-    /*for(ProductDto MyProd:listProd){
-        return  MyProd.getDescription();
-    }*/
-    UserDto userDto = userService.getUserById(1L);
-
-    StringBuilder result = new StringBuilder(userDto.getLogin()+", ");
+//    return listProd;
+//}
 
 
-for (RolesOfUsers roles:userDto.getAuthority()){
-
-    result.append(roles.getRole_name()).append(",");
-}
-
-return  result.toString();
-}
+//@GetMapping()
+//public String testreq(){
+////    List<ProductDto> listProd = productService.getAllProduct();
+//    //Product product  = new Product(1L,"Titile", "Description",12, "City");
+//
+//    /*for(ProductDto MyProd:listProd){
+//        return  MyProd.getDescription();
+//    }*/
+//    UserDto userDto = userService.getUserById(1L);
+//
+//    StringBuilder result = new StringBuilder(userDto.getLogin()+", ");
+//
+//
+//for (RolesOfUsers roles:userDto.getAuthority()){
+//
+//    result.append(roles.getRole_name()).append(",");
+//}
+//
+//return  result.toString();
+//}
 
 @PutMapping("{id}")
 public ResponseEntity<ProductDto> updateProductDTO(@PathVariable("id") Long id, @RequestBody ProductDto productDto){

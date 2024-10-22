@@ -35,4 +35,9 @@ public class UserServiceImpl implements UserService {
         User user = userRepo.findUserByLogin(login);
         return UserMapper.mapToUserDto(user);
     }
+
+    @Override
+    public boolean  checkPassword(String rawPassword, String comparisonPassword) {
+        return rawPassword.equals(comparisonPassword);
+    }
 }

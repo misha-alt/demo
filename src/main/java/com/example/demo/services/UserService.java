@@ -9,4 +9,8 @@ public interface UserService {
     UserDto getUserById(Long id);
 
     UserDto getUserByLogin(String login);
+
+     boolean checkPassword (String rawPassword, String encodedPassword);
+
+
 }

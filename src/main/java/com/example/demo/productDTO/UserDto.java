@@ -14,7 +14,7 @@ import java.util.Set;
 @AllArgsConstructor
 public class UserDto {
 
-    private  int id;
+    private  Long id;
     private String login;
     private String password;
     private Set<RolesOfUsers> authority;

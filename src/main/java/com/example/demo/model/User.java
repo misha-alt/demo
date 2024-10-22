@@ -1,11 +1,12 @@
 package com.example.demo.model;
 
 import java.util.Set;
-import jakarta.persistence.*;
+/*import jakarta.persistence.*;*/
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import javax.persistence.*;
 
 @Getter
 @Setter
@@ -17,7 +18,7 @@ public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(unique = true, nullable =  false)
-    private int id;
+    private Long id;
 
     @Column(nullable = false)
     private String login;

@@ -1,12 +1,17 @@
 package com.example.demo.model;
 
-import jakarta.persistence.*;
+/*import jakarta.persistence.*;*/
+import lombok.*;
+
+import javax.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+
 import java.util.Set;
+
 @Getter
 @Setter
 @NoArgsConstructor
@@ -17,7 +22,7 @@ public class RolesOfUsers {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(unique = true, nullable =  false)
-    private int id;
+    private Long id;
 
     @Column(name = "role_name")
     private String role_name;
