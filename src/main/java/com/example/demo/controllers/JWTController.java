@@ -31,7 +31,7 @@ public class JWTController {
             String token = jwtTokenProvider.createToken(foundUser.getLogin());
             Map<String, String> response = new HashMap<>();
             response.put("token", token);
-            System.out.println("token ok");
+           // System.out.println("token ok");
             return ResponseEntity.ok(response);
         } else {
             return ResponseEntity.status(401).build(); // Unauthorized

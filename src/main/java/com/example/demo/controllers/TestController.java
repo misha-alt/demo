@@ -1,6 +1,7 @@
 package com.example.demo.controllers;
 
 import com.example.demo.mapper.ProductMapper;
+import com.example.demo.mapper.UserMapper;
 import com.example.demo.model.Product;
 import com.example.demo.model.RolesOfUsers;
 import com.example.demo.model.User;
@@ -17,6 +18,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.security.Principal;
 import java.util.List;
 //@CrossOrigin("*")
 @AllArgsConstructor
@@ -36,6 +38,7 @@ public ResponseEntity<ProductDto> createProduct(@RequestBody ProductDto productD
 
 @GetMapping("{id}")
 public ResponseEntity<ProductDto> getProductById(@PathVariable("id") Long id){
+
     ProductDto getProd = productService.getProductById(id);
     return  ResponseEntity.ok(getProd);
 }
@@ -44,6 +47,8 @@ public ResponseEntity<List<ProductDto>> getAllProd(){
 List<ProductDto> listProd = productService.getAllProduct();
     return ResponseEntity.ok(listProd);
 }
+
+
 
 
 //@GetMapping()
@@ -68,7 +73,7 @@ List<ProductDto> listProd = productService.getAllProduct();
 //
 //for (RolesOfUsers roles:userDto.getAuthority()){
 //
-//    result.append(roles.getRole_name()).append(",");
+//    result.append(roles.getRoleName()).append(",");
 //}
 //
 //return  result.toString();
@@ -86,5 +91,7 @@ public ResponseEntity<String> deleteProduct(@PathVariable("id") Long id){
 
     return ResponseEntity.ok("Product deleted successfully");
 }
+
+
 
 }

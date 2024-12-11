@@ -13,6 +13,6 @@ import java.util.Set;
 @AllArgsConstructor
 public class RolesOfUsersDto {
     private  Long id;
-    private String role_name;
-    private Set<UserDto> userDto;
+    private String rolename;
+    private Set<UserDto> userDtoSet;
 }

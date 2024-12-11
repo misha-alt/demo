@@ -12,20 +12,27 @@ import java.util.stream.Collectors;
 public class RolesOfUsersMapper {
     // Маппинг из RolesOfUsers в RolesOfUsersDto
     public static RolesOfUsersDto mapToRolesOfUsersDto(RolesOfUsers role) {
+        if (role == null) {
+            return null; // или выбросьте исключение
+        }
+
         Set<UserDto> userDtos = role.getUserSet().stream()
                 .map(user -> new UserDto(user.getId(), user.getLogin(), user.getPassword(), new HashSet<>()))
                 .collect(Collectors.toSet());
 
-        return new RolesOfUsersDto(role.getId(), role.getRole_name(), userDtos);
+        return new RolesOfUsersDto(role.getId(), role.getRolename(), userDtos);
     }
 
     // Маппинг из RolesOfUsersDto в RolesOfUsers
     public static RolesOfUsers mapToRolesOfUsers(RolesOfUsersDto roleDto) {
-        Set<User> users = roleDto.getUserDto().stream()
+        if (roleDto == null) {
+            return null; // или выбросьте исключение
+        }
+
+        Set<User> users = roleDto.getUserDtoSet().stream()
                 .map(userDto -> new User(userDto.getId(), userDto.getLogin(), userDto.getPassword(), new HashSet<>()))
                 .collect(Collectors.toSet());
 
-        return new RolesOfUsers(roleDto.getId(), roleDto.getRole_name(), users);
+        return new RolesOfUsers(roleDto.getId(), roleDto.getRolename(), users);
     }
 }
-

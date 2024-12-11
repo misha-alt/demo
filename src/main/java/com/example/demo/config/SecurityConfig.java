@@ -41,12 +41,15 @@ public class SecurityConfig   {
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
-                .cors() // Включаем поддержку CORS
+                .cors() // Включаем поддержку CORS .hasRole("ADMIN")
                 .and()
                 .authorizeRequests(authorize -> authorize
-                        .antMatchers(HttpMethod.GET, "/test").hasRole("EMPLOEE")
-                        .antMatchers(HttpMethod.POST, "/test").hasRole("EMPLOEE")
+                        .antMatchers(HttpMethod.GET, "/test").hasAnyRole("EMPLOEE", "ADMIN")
+
+                        .antMatchers(HttpMethod.POST, "/test").hasAnyRole("EMPLOEE", "ADMIN")
                         .antMatchers(HttpMethod.POST,"/auth").permitAll()
+                        .antMatchers(HttpMethod.POST, "/reg").permitAll()
+
                         .anyRequest().authenticated() // Все другие запросы требуют аутентификации
                 )
                 //.formLogin(withDefaults()) // Используем стандартную форму входа

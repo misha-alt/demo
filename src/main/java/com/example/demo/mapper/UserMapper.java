@@ -16,19 +16,46 @@ public class UserMapper {
 
 
         public static UserDto mapToUserDto (User user){
-            Set<RolesOfUsers> rolesDto = user.getAuthority().stream()
-                    .map(role -> new RolesOfUsers(role.getId(), role.getRole_name(), new HashSet<>()))
-                    .collect(Collectors.toSet());
+//            Set<RolesOfUsers> rolesDto = user.getAuthority().stream()
+//                    .map(role -> new RolesOfUsers(role.getId(), role.getRoleName(), new HashSet<>()))
+//                    .collect(Collectors.toSet());
+            // Проверка на null для authority
+
+            Set<RolesOfUsersDto> rolesDto = (user.getAuthority() != null) ?
+                    user.getAuthority().stream()
+                            .map(role -> new RolesOfUsersDto(role.getId(), role.getRolename(), new HashSet<>()))
+                            .collect(Collectors.toSet()) :
+                    new HashSet<>(); // Инициализация пустым множеством, если authority равно null
 
             return new UserDto(user.getId(), user.getLogin(), user.getPassword(), rolesDto);
         }
 
         // Маппинг из UserDto в User
-        public static User mapToUser (UserDto userDto){
-            Set<RolesOfUsers> roles = userDto.getAuthority().stream()
-                    .map(roleDto -> new RolesOfUsers(roleDto.getId(), roleDto.getRole_name(), new HashSet<>()))
-                    .collect(Collectors.toSet());
+    public static User mapToUser (UserDto userDto){
+    Set<RolesOfUsers> roles =  (userDto.getAuthority() != null)
+            ? userDto.getAuthority().stream()
+            .map(roleDto -> new RolesOfUsers(roleDto.getId(), roleDto.getRolename(), new HashSet<>()))
+            .collect(Collectors.toSet()): new HashSet<>();
 
-            return new User(userDto.getId(), userDto.getLogin(), userDto.getPassword(), roles);
-        }
+    return new User(userDto.getId(), userDto.getLogin(), userDto.getPassword(), roles);
+}
     }
+
+
+//public static User mapToUser (UserDto userDto){
+//    Set<RolesOfUsers> roles =  (userDto.getAuthority() != null)
+//            ? userDto.getAuthority().stream()
+//            .map(roleDto -> new RolesOfUsers(roleDto.getId(), roleDto.getRoleName(), new HashSet<>()))
+//            .collect(Collectors.toSet()): new HashSet<>();
+//
+//    return new User(userDto.getId(), userDto.getLogin(), userDto.getPassword(), roles);
+//}
+
+
+//public static User mapToUser (UserDto userDto){
+//    Set<RolesOfUsers> roles = userDto.getAuthority().stream()
+//            .map(roleDto -> new RolesOfUsers(roleDto.getId(), roleDto.getRoleName(), new HashSet<>()))
+//            .collect(Collectors.toSet());
+//
+//    return new User(userDto.getId(), userDto.getLogin(), userDto.getPassword(), roles);
+//}

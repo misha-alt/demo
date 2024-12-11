@@ -12,5 +12,7 @@ public interface UserService {
 
      boolean checkPassword (String rawPassword, String encodedPassword);
 
+     UserDto createUser(UserDto userDto);
+
 
 }

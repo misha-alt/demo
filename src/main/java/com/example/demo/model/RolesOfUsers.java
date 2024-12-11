@@ -24,8 +24,8 @@ public class RolesOfUsers {
     @Column(unique = true, nullable =  false)
     private Long id;
 
-    @Column(name = "role_name")
-    private String role_name;
+    @Column(name = "rolename")
+    private String rolename;
 
     @ManyToMany(cascade = CascadeType.ALL,fetch = FetchType.EAGER, mappedBy = "authority")
     private Set<User> userSet;

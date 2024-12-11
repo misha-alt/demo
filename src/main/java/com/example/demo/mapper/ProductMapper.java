@@ -4,7 +4,7 @@ import com.example.demo.model.Product;
 import com.example.demo.productDTO.ProductDto;
 
 public class ProductMapper {
-    public static ProductDto mappToProdDTO(Product product){
+    public static ProductDto  mappToProdDTO(Product product){
 
         return new ProductDto(product.getId(),
                 product.getTitle(),
