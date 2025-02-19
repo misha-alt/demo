@@ -7,6 +7,7 @@ title varchar(255),
 description varchar(255) not null,
 price integer not null,
 city varchar(255) not null,
+user_id integer
 );
 
 create table USER
@@ -30,6 +31,16 @@ user_id BIGINT not null,
 userrole_id BIGINT not null
 );
 
+create table COMMENT
+(
+id integer not null,
+comment varchar(255),
+comment_date DATE,
+loginOfCreator varchar(255),
+user_id integer,
+primary key (id)
+);
+
 INSERT INTO PRODUCT(id, title, description, price, city)
 VALUES(1, 'Stone', 'Simple Stone', 10, 'Mogilev');
 
@@ -47,7 +58,10 @@ VALUES(1, 1);
 
 INSERT INTO ROLESOFUSERS(id, rolename)
 VALUES(1, 'ROLE_EMPLOEE');
---VALUES(2, 'ROLE_ADMIN');
+INSERT INTO ROLESOFUSERS(id, rolename)
+VALUES(2, 'ROLE_ADMIN');
 
 alter table USER_ROLES add constraint f123UC foreign key (user_id ) references USER;
 alter table USER_ROLES add constraint fo567C foreign key (userrole_id ) references ROLESOFUSERS;
+alter table PRODUCT add constraint wre45f foreign key (user_id)references USER;
+alter table COMMENT add constraint for_UCC foreign key (user_id) references USER;

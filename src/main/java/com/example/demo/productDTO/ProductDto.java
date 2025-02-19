@@ -4,6 +4,7 @@ package com.example.demo.productDTO;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;*/
+import com.example.demo.model.User;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -20,5 +21,6 @@ public class ProductDto {
     private String description;
     private int price;
     private String city;
+    private  UserDto userDto;
 
 }

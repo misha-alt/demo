@@ -35,19 +35,17 @@ public class UserDetailsService implements org.springframework.security.core.use
     }
     @Override
     public UserDetails loadUserByUsername(String login) throws UsernameNotFoundException {
-       UserDto userDto = userService.getUserByLogin(login);
+       User user = userService.getUserByLogin(login);
 
-        if (userDto == null) {
+        if (user == null) {
             throw new UsernameNotFoundException("User not found");
         }
 
 
-
-
         return new org.springframework.security.core.userdetails.User(
-                userDto.getLogin(),
-                userDto.getPassword(),
-                getAuthorities(UserMapper.mapToUser(userDto))
+                user.getLogin(),
+                user.getPassword(),
+                getAuthorities(user)
         );
     }
 

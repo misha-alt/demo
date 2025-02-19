@@ -18,22 +18,22 @@ public class UserServiceImpl implements UserService {
     private UserRepo userRepo;
 
     @Override
-    public UserDto getUserById(Long id) {
+    public User getUserById(Long id) {
         Optional<User> optionalUser = userRepo.findById(id);
 
         // Проверяем, есть ли пользователь, и получаем его, если он существует
         if (optionalUser.isPresent()) {
             User user = optionalUser.get(); // Извлекаем User из Optional
-            return UserMapper.mapToUserDto(user);
+            return user;
         } else {
             // Обработайте случай, когда пользователь не найден, например, выбросьте исключение
             throw new UserNotFoundException("User not found with id: " + id);
         }
     }
     @Override
-    public UserDto getUserByLogin(String login) {
+    public User getUserByLogin(String login) {
         User user = userRepo.findUserByLogin(login);
-        return UserMapper.mapToUserDto(user);
+        return user;
     }
 
     @Override
@@ -42,10 +42,18 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public UserDto createUser(UserDto userDto) {
-        User user = UserMapper.mapToUser(userDto);
+    public User createUser(User user) {
+
         User savedUser = userRepo.save(user);
 
-        return UserMapper.mapToUserDto(savedUser);
+        return savedUser;
+    }
+
+    @Override
+    public User updateUser(User user) {
+
+        User userSaved = userRepo.save(user);
+
+        return userSaved;
     }
 }

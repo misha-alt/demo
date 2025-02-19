@@ -8,57 +8,59 @@ import exeptions.ResurceNotFoundExeption;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
+
+import javax.transaction.Transactional;
 import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
 @AllArgsConstructor
+
 public class ProductServiceEmpl implements ProductService {
 
     private ProductRepo productRepo;
     @Override
-    public ProductDto createProduct(ProductDto productDto) {
+    public Product createProduct(Product product) {
 
-        Product product = ProductMapper.mappToProd(productDto);
+
         Product savedProd = productRepo.save(product);
 
 
-        return ProductMapper.mappToProdDTO(savedProd);
+        return savedProd;
     }
 
     @Override
-    public ProductDto getProductById(Long id) {
+    public Product getProductById(Long id) {
 
         Product product =productRepo.findById(id).orElseThrow(()->
                 new ResurceNotFoundExeption("Product is not exist with" + id));
-        return ProductMapper.mappToProdDTO(product);
+        return product;
     }
 
     @Override
-    public List<ProductDto> getAllProduct() {
+    public List<Product> getAllProduct() {
        List<Product> prodList= productRepo.findAll();
 
-        return prodList.stream().map((product) -> ProductMapper.mappToProdDTO(product)).collect(Collectors.toList());
+        return prodList;
     }
 
     @Override
-    public ProductDto updateProduct(Long id, ProductDto productDto) {
+    public Product updateProduct(Long id, Product product) {
 
-       Product product = productRepo.findById(id).orElseThrow(()-> new ResurceNotFoundExeption("Product is not exist with" + id));
+if (productRepo.findById(id).isEmpty()){
 
+    throw new ResurceNotFoundExeption("Product is not exist with id " + id);
 
-
-       product.setTitle(productDto.getTitle());
-        product.setDescription(productDto.getDescription());
-       product.setPrice(productDto.getPrice());
-        product.setCity(productDto.getCity());
-
-      Product updatedProd = productRepo.save(product);
-
-
+}
+        Product existingProduct = productRepo.findById(id).get();
+        existingProduct.setTitle(product.getTitle());
+        existingProduct.setDescription(product.getDescription());
+        existingProduct.setPrice(product.getPrice());
+        existingProduct.setCity(product.getCity());
 
 
-        return ProductMapper.mappToProdDTO(updatedProd);
+        Product updatedProd = productRepo.save(existingProduct);
+        return updatedProd;
     }
 
     @Override

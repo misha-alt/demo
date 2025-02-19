@@ -25,7 +25,7 @@ public class JWTController {
 
     @PostMapping()
     public ResponseEntity<Map<String, String>> login(@RequestBody User user) {
-        UserDto foundUser = userService.getUserByLogin(user.getLogin());
+        User foundUser = userService.getUserByLogin(user.getLogin());
 
         if (foundUser != null && userService.checkPassword(user.getPassword(), foundUser.getPassword())) {
             String token = jwtTokenProvider.createToken(foundUser.getLogin());

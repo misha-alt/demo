@@ -6,13 +6,15 @@ import com.example.demo.productDTO.UserDto;
 
 public interface UserService {
 
-    UserDto getUserById(Long id);
+    User getUserById(Long id);
 
-    UserDto getUserByLogin(String login);
+    User getUserByLogin(String login);
 
      boolean checkPassword (String rawPassword, String encodedPassword);
 
-     UserDto createUser(UserDto userDto);
+     User createUser(User user);
+
+     User updateUser(User user);
 
 
 }

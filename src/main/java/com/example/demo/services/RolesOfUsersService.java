@@ -10,7 +10,7 @@ public interface RolesOfUsersService {
 
     RolesOfUsers createRole (RolesOfUsers rolesOfUsers);
 
-    RolesOfUsersDto getById (Long id);
+    RolesOfUsers getById (Long id);
 
     List<RolesOfUsers> getallRoles();
 

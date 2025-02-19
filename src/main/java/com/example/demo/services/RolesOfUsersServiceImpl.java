@@ -28,10 +28,10 @@ public class RolesOfUsersServiceImpl implements RolesOfUsersService{
     }
 
     @Override
-    public RolesOfUsersDto getById(Long id) {
+    public RolesOfUsers getById(Long id) {
         RolesOfUsers rolesOfUsers =rolesOfUsersRepo.findById(id).orElseThrow(()->
-                new ResurceNotFoundExeption("Product is not exist with" + id));
-        return RolesOfUsersMapper.mapToRolesOfUsersDto(rolesOfUsers);
+                new ResurceNotFoundExeption("Role is not exist with" + id));
+        return rolesOfUsers;
     }
 
     @Override
@@ -53,9 +53,10 @@ public class RolesOfUsersServiceImpl implements RolesOfUsersService{
         rolesOfUsersDB.setRolename(roles.getRolename());
 
         rolesOfUsersDB.setUserSet(roles.getUserSet());
+       RolesOfUsers savedRoleInDB = rolesOfUsersRepo.save(rolesOfUsersDB);
 
 
-            return rolesOfUsersDB;
+            return savedRoleInDB;
 
     }
 

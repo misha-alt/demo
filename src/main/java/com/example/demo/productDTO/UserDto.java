@@ -1,5 +1,6 @@
 package com.example.demo.productDTO;
 
+import com.example.demo.model.Product;
 import com.example.demo.model.RolesOfUsers;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -18,5 +19,6 @@ public class UserDto {
     private String login;
     private String password;
     private Set<RolesOfUsersDto> authority;
+    private  Set<ProductDto> productDtos;
 
 }

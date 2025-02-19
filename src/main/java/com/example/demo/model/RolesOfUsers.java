@@ -1,6 +1,8 @@
 package com.example.demo.model;
 
 /*import jakarta.persistence.*;*/
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 
 import javax.persistence.*;
@@ -10,6 +12,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 
+import java.util.HashSet;
 import java.util.Set;
 
 @Getter
@@ -27,6 +30,11 @@ public class RolesOfUsers {
     @Column(name = "rolename")
     private String rolename;
 
-    @ManyToMany(cascade = CascadeType.ALL,fetch = FetchType.EAGER, mappedBy = "authority")
-    private Set<User> userSet;
+
+
+    @ManyToMany(/*cascade = CascadeType.ALL,*//*fetch = FetchType.EAGER,*/ mappedBy = "authority")
+    @JsonIgnore
+    private Set<User> userSet = new HashSet<>();
+
+
 }

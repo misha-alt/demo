@@ -47,8 +47,10 @@ public class SecurityConfig   {
                         .antMatchers(HttpMethod.GET, "/test").hasAnyRole("EMPLOEE", "ADMIN")
 
                         .antMatchers(HttpMethod.POST, "/test").hasAnyRole("EMPLOEE", "ADMIN")
+                        .antMatchers(HttpMethod.POST,"/comment").hasAnyRole("EMPLOEE", "ADMIN")
                         .antMatchers(HttpMethod.POST,"/auth").permitAll()
                         .antMatchers(HttpMethod.POST, "/reg").permitAll()
+
 
                         .anyRequest().authenticated() // Все другие запросы требуют аутентификации
                 )

@@ -31,5 +31,9 @@ public class Product {
     @Column(name="city")
     private String city;
 
+//    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+//    @JoinColumn(name = "user_id")
+//    private User user;
+
 
 }
